@@ -1,9 +1,10 @@
 import json
 
 
-class Json_File:
+class JsonFile:
 
-    def convert_to_dict(self, users, books):
+    @staticmethod
+    def convert_to_dict(users, books):
         list_of_users = []
         list_of_books = []
 
@@ -15,8 +16,9 @@ class Json_File:
 
         return list_of_books, list_of_users
 
-    def write(self, user, books):
-        books_list, users_list = self.convert_to_dict(user, books)
+    @staticmethod
+    def write(user, books):
+        books_list, users_list = JsonFile.convert_to_dict(user, books)
         data = {"books": books_list,
                 "users": users_list
                 }
@@ -24,6 +26,7 @@ class Json_File:
         with open("data.json", "w") as f:
             f.write(json.dumps(data))
 
-    def read(self):
+    @staticmethod
+    def read():
         with open("data.json", "r") as f:
             return json.loads(f.read())
